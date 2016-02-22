@@ -2,17 +2,14 @@ package com.somerpg;
 
 public class Hero extends Character {
 
-	private String			name;
-	private int				maxHealth;
-	private int				currentHealth;
+	private static String[] pokemon;
 	
-	public Hero(String name, int maxHealth, 
-			int currentHealth)
+	static
 	{
-		this.name = name;
-		this.maxHealth = maxHealth;
-		this.currentHealth = currentHealth;
+		//load saved data from file
 	}
+	
+	
 	
 	
 }

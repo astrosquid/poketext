@@ -29,6 +29,8 @@ public class UsePropFile {
 	{
 		String[] propValues = new String[arrayLength];
 		
+		System.out.println("at upf begin");
+		
 		try
 		{
 			Properties prop = new Properties();
@@ -59,6 +61,9 @@ public class UsePropFile {
 		{
 			//inputStream.close();
 		}
+		for(String element : propValues)
+			System.out.print(element+" ");
+		System.out.println();
 		
 		return propValues;
 	}

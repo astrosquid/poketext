@@ -1,26 +1,44 @@
 package com.somerpg;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Properties;
 
 public class Inventory {
 	
 	private static int itemCount		= 10;
+	/*
 	private static String itemPropFile 
 		= "pokemonitems.properties";
 	private static String itemQuantPropFile
 		= "itemquantities.properties";
+	*/
 
 	private static String[] itemNames;
 	private static String[] itemDescs;
-	private static int[] itemQuantities;
+	private static String[] itemQuants;
+	private static String itemNamesProp = "pokemonitems.properties";
+	private static String itemQuantsProp = "itemquantities.properties";
 	
-	public static void init(String propertyFileName)
+	static
 	{
+		init(itemNames, itemNamesProp);
+		init(itemQuants, itemQuantsProp);
+	}
+	
+	/*
+	 * This method must be called as many times as there are
+	 * property files necessary for it to fetch info from.
+	 * Eventually I think I can abstract this out to an even
+	 * higher layer, since monsters will likely be doing the 
+	 * same thing.
+	 * @TODO: abstract this further.
+	 */
+	public static void init(String[] itemArray, 
+			String propertyFileName)
+	{
+		System.out.println("in init begin");
 		try
 		{
-			itemNames = UsePropFile.getPropValues(
+			itemArray = UsePropFile.getPropValues(
 					propertyFileName, itemCount);
 		}
 		catch(IOException ioerr)
@@ -29,13 +47,23 @@ public class Inventory {
 		}
 	}
 	
+	public static String[] getNamesArray()
+	{
+		return itemNames;
+	}
+	
+	public static String[] getQuantArray()
+	{
+		return itemQuants;
+	}
+	
 	public static String getItemName(int itemIndex)
 	{
 		return itemNames[itemIndex];
 	}
 	
-	public static int getItemQuantity(int itemIndex)
+	public static String getItemQuantity(int itemIndex)
 	{
-		return itemQuantities[itemIndex];
+		return itemQuants[itemIndex];
 	}
 }
