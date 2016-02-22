@@ -7,24 +7,21 @@ import java.util.Properties;
 public class Inventory {
 	
 	private static int itemCount		= 10;
-	private static String itemPropFile = "pokemonitems.properties";
-	private String itemQuantPropFile;
+	private static String itemPropFile 
+		= "pokemonitems.properties";
+	private static String itemQuantPropFile
+		= "itemquantities.properties";
 
 	private static String[] itemNames;
-	private String[] itemDescs;
+	private static String[] itemDescs;
 	private static int[] itemQuantities;
 	
-	public Inventory()
-	{
-		
-	}
-	
-	public static void init()
+	public static void init(String propertyFileName)
 	{
 		try
 		{
 			itemNames = UsePropFile.getPropValues(
-					itemPropFile, itemCount);
+					propertyFileName, itemCount);
 		}
 		catch(IOException ioerr)
 		{
