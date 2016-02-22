@@ -7,9 +7,11 @@ import java.io.*;
 public class UsePropFile {
 
 	InputStream inputStream;
+	private static String path
+		= "/Users/chris/Documents/workspace/some-rpg/src/com/somerpg/";
 	
 	//looks up a property file in another prop file
-	public static void writeToProp(String propToSave)
+	public void writeToProp(String propToSave)
 	{
 		
 	}
@@ -22,7 +24,7 @@ public class UsePropFile {
 	 * Since it will return an entire array, this is meant 
 	 * mostly for initialization. 
 	 */
-	public String[] getPropValues(String propFileName,
+	public static String[] getPropValues(String propFileName,
 			int arrayLength) throws IOException
 	{
 		String[] propValues = new String[arrayLength];
@@ -30,17 +32,20 @@ public class UsePropFile {
 		try
 		{
 			Properties prop = new Properties();
-			inputStream = getClass().getClassLoader().
-					getResourceAsStream(propFileName);
+			prop.load(new FileInputStream(
+					path+propFileName));
+			/*inputStream = getClass().getClassLoader().
+					getResourceAsStream(
+					"/Users/chris/Documents/workspace/some-rpg"+propFileName);
 			
 			if (inputStream != null) {
 				prop.load(inputStream);
 			} else {
 				throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
 			}
-			
+			*/
 			String lookup;
-			for (int i = 0; i <= arrayLength; i++)
+			for (int i = 0; i < arrayLength; i++)
 			{
 				lookup = Utilities.padPropIndex(i);
 				propValues[i] = prop.getProperty(lookup);
@@ -52,7 +57,7 @@ public class UsePropFile {
 		}
 		finally
 		{
-			inputStream.close();
+			//inputStream.close();
 		}
 		
 		return propValues;

@@ -1,18 +1,44 @@
 package com.somerpg;
 
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Properties;
 
 public class Inventory {
 	
-	private int pokeCount		= 226;
+	private static int itemCount		= 10;
+	private static String itemPropFile = "pokemonitems.properties";
+	private String itemQuantPropFile;
 
-	private String[] itemNames		= new String[pokeCount];
-	private String[] itemDescs		= new String[pokeCount];
-	private int[] itemQuantities 	= new int[pokeCount];
+	private static String[] itemNames;
+	private String[] itemDescs;
+	private static int[] itemQuantities;
 	
 	public Inventory()
 	{
 		
+	}
+	
+	public static void init()
+	{
+		try
+		{
+			itemNames = UsePropFile.getPropValues(
+					itemPropFile, itemCount);
+		}
+		catch(IOException ioerr)
+		{
+			ioerr.printStackTrace();
+		}
+	}
+	
+	public static String getItemName(int itemIndex)
+	{
+		return itemNames[itemIndex];
+	}
+	
+	public static int getItemQuantity(int itemIndex)
+	{
+		return itemQuantities[itemIndex];
 	}
 }
